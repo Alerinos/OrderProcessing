@@ -1,0 +1,19 @@
+﻿<PageTitle>Orders</PageTitle>
+
+@if (orders is null)
+{
+    <p><em>Loading...</em></p>
+
+}else
+{
+    <QuickGrid Items="@orders.AsQueryable()">
+        <PropertyColumn Property="@(p => p.ClientName)" Title="Client name" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Price)" Title="Price" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Count)" Title="Count lines" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Status)" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Created)" Format="HH:mm dd.MM" Sortable="true" />
+        <TemplateColumn Title="Action" Align="Align.Center">
+            <a href="@($"order/{context.Id}")">details</a>
+        </TemplateColumn>
+    </QuickGrid>
+}

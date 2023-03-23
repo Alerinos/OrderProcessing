@@ -1,0 +1,56 @@
+﻿@if(order is null)
+{
+    <PageTitle>Details</PageTitle>
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PageTitle>Details @order.ClientName</PageTitle>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Details</h5>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Client name</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.ClientName">
+                    </div>
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Price</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.Price" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Count order lines</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.Count" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Date</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.Created.ToString("HH:mm dd.MM")" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Notes</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.Note">
+                    </div>
+                    <div class="col">
+                        <label for="validationCustom01" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="@order.Status">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Order Lines</h5>
+            @if (order.Lines is not null)
+            {
+                <QuickGrid Items="@order.Lines.AsQueryable()">
+                    <PropertyColumn Property="@(p => p.Product)" Title="Client name" Sortable="true" />
+                    <PropertyColumn Property="@(p => p.Price)" Title="Price" Sortable="true" />
+                </QuickGrid>
+            }
+        </div>
+    </div>
+}
