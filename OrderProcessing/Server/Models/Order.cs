@@ -1,4 +1,6 @@
-﻿namespace OrderProcessing.Server.Models;
+﻿using System.Net.NetworkInformation;
+
+namespace OrderProcessing.Server.Models;
 
 /// <summary>
 /// Database model of all orders
@@ -25,10 +27,20 @@ public class Order
     /// </summary>
     public string? Note { get; set; }
 
+    private StatusType _status = StatusType.New;
+
     /// <summary>
     /// Order status
     /// </summary>
-    public StatusType Status { get; set; } = StatusType.New;
+    public StatusType Status
+    {
+        get => _status;
+        set
+        {
+            if (_status == StatusType.New) // Only allow change if status is "New"
+                _status = value;
+        }
+    }
 
     /// <summary>
     /// Order lines, order details
